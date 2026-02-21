@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR Internship Prep — Ace It</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6f0;
+    --dark: #1a1a2e;
+    --accent: #c8845a;
+    --accent2: #7b9e87;
+    --muted: #6b6b7a;
+    --card: #ffffff;
+    --border: #e8e0d4;
+    --gold: #d4a853;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,246,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--dark);
+    background: var(--border);
+  }
+
+  .nav-btn.active {
+    color: var(--accent);
+    background: rgba(200,132,90,0.1);
+  }
+
+  /* MAIN */
+  main {
+    padding-top: 60px;
+    min-height: 100vh;
+  }
+
+  .page {
+    display: none;
+    animation: fadeIn 0.35s ease;
+  }
+
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* HERO / HOME */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(200,132,90,0.12);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.8rem 2rem;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--dark);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--dark);
+    border: 1.5px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    max-width: 960px;
+    margin: 3rem auto 2rem;
+    padding: 0 2rem;
+  }
+
+  .feature-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+
+  .feature-card:hover::before { transform: scaleX(1); }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .feature-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* SECTION LAYOUT */
+  .section-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* STAR METHOD */
+  .star-banner {
+    background: var(--dark);
+    color: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .star-banner::after {
+    content: '⭐';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    opacity: 0.12;
+  }
+
+  .star-banner h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .star-banner p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .star-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    .star-steps { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  .star-step {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem;
+  }
+
+  .star-step .letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .star-step h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .star-step p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+  /* PRACTICE Q */
+  .q-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .q-category {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent2);
+    background: rgba(123,158,135,0.12);
+    display: inline-block;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    margin-bottom: 0.9rem;
+  }
+
+  .q-box h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .q-hints {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding-top: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  .q-hints.open { display: block; }
+
+  .q-hints h5 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.7rem;
+  }
+
+  .hint-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hint-list li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.5;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .hint-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  .reveal-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.83rem;
+    font-weight: 600;
+    padding: 0.45rem 1.2rem;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    color: var(--dark);
+    transition: all 0.2s;
+  }
+
+  .reveal-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* PRACTICE MODE */
+  .practice-container {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .practice-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .star-labels {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .star-label-pill {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+  }
+
+  .pill-s { background: rgba(200,132,90,0.15); color: var(--accent); }
+  .pill-t { background: rgba(212,168,83,0.15); color: var(--gold); }
+  .pill-a { background: rgba(123,158,135,0.15); color: var(--accent2); }
+  .pill-r { background: rgba(26,26,46,0.1); color: var(--dark); }
+
+  .answer-area {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--dark);
+    background: var(--cream);
+    resize: vertical;
+    min-height: 140px;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .answer-area:focus { border-color: var(--accent); }
+
+  .practice-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .timer-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .q-nav {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+
+  .q-counter {
+    font-size: 0.85rem;
+    color: var(--muted);
+    flex: 1;
+    text-align: center;
+  }
+
+  /* TIPS */
+  .tips-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active {
+    background: var(--dark);
+    color: white;
+    border-color: var(--dark);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+  .tip-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .tip-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--border);
+    line-height: 1;
+    min-width: 2rem;
+  }
+
+  .tip-body h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .tip-body p { font-size: 0.87rem; color: var(--muted); line-height: 1.55; }
+
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 580px) { .do-dont { grid-template-columns: 1fr; } }
+
+  .do-box, .dont-box {
+    border-radius: 14px;
+    padding: 1.4rem;
+  }
+
+  .do-box {
+    background: rgba(123,158,135,0.08);
+    border: 1px solid rgba(123,158,135,0.3);
+  }
+
+  .dont-box {
+    background: rgba(200,90,90,0.06);
+    border: 1px solid rgba(200,90,90,0.2);
+  }
+
+  .do-box h4 { color: var(--accent2); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.8rem; }
+  .dont-box h4 { color: #c85a5a; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.8rem; }
+
+  .do-box ul, .dont-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .do-box li, .dont-box li { font-size: 0.87rem; color: var(--muted); line-height: 1.45; padding-left: 1.2rem; position: relative; }
+  .do-box li::before { content: '✓'; position: absolute; left: 0; color: var(--accent2); font-weight: 700; }
+  .dont-box li::before { content: '✗'; position: absolute; left: 0; color: #c85a5a; font-weight: 700; }
+
+  /* GLOSSARY */
+  .glossary-search {
+    width: 100%;
+    padding: 0.9rem 1.4rem;
+    border: 1.5px solid var(--border);
+    border-radius: 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    background: white;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .glossary-search:focus { border-color: var(--accent); }
+
+  .gloss-item {
+    border-bottom: 1px solid var(--border);
+    padding: 1.2rem 0;
+  }
+
+  .gloss-item:last-child { border-bottom: none; }
+
+  .gloss-term {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+    color: var(--dark);
+  }
+
+  .gloss-def {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .gloss-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 0.2rem;
+    display: block;
+  }
+
+  /* CHECKLIST */
+  .checklist-wrap {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .check-group { margin-bottom: 2rem; }
+  .check-group h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--dark);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.6rem 0;
+    cursor: pointer;
+  }
+
+  .check-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+    margin-top: 2px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .check-item label {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .check-item input:checked + label {
+    color: var(--dark);
+    text-decoration: line-through;
+    color: #aaa;
+  }
+
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 10px;
+    height: 8px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 10px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-label {
+    font-size: 0.83rem;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  /* Footer hint */
+  .footer-hint {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+    color: var(--border);
+  }
+
+  /* Mobile nav fix */
+  .mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--dark);
+  }
+
+  @media (max-width: 600px) {
+    .mobile-nav-toggle { display: block; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0; right: 0;
+      background: var(--cream);
+      padding: 1rem;
+      flex-direction: column;
+      gap: 0.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-links.open { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">HR <span>Prep</span></div>
+  <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</button>
+  <div class="nav-links" id="navLinks">
+    <button class="nav-btn active" onclick="navigate('home')">Home</button>
+    <button class="nav-btn" onclick="navigate('star')">STAR Method</button>
+    <button class="nav-btn" onclick="navigate('questions')">Questions</button>
+    <button class="nav-btn" onclick="navigate('practice')">Practice</button>
+    <button class="nav-btn" onclick="navigate('tips')">Tips & Tricks</button>
+    <button class="nav-btn" onclick="navigate('glossary')">Glossary</button>
+    <button class="nav-btn" onclick="navigate('checklist')">Checklist</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HOME -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <span class="hero-tag">Your HR Internship Companion</span>
+      <h1>Land your <em>dream</em> HR internship with confidence</h1>
+      <p>Everything you need to prepare — from mastering the STAR method to HR-specific interview questions, industry tips, and a ready-for-interview checklist.</p>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="navigate('practice')">Start Practising →</button>
+        <button class="btn btn-secondary" onclick="navigate('star')">Learn STAR Method</button>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="feature-card" onclick="navigate('star')">
+        <span class="card-icon">⭐</span>
+        <h3>STAR Method</h3>
+        <p>Master the framework that underpins every behavioural interview answer.</p>
+      </div>
+      <div class="feature-card" onclick="navigate('questions')">
+        <span class="card-icon">💬</span>
+        <h3>Practice Questions</h3>
+        <p>HR-specific interview questions with guided answer hints.</p>
+      </div>
+      <div class="feature-card" onclick="navigate('practice')">
+        <span class="card-icon">🎯</span>
+        <h3>Practice Mode</h3>
+        <p>Timed practice with a live answer pad. Simulate the real thing.</p>
+      </div>
+      <div class="feature-card" onclick="navigate('tips')">
+        <span class="card-icon">💡</span>
+        <h3>Tips & Tricks</h3>
+        <p>Insider advice on preparation, presentation, and follow-up.</p>
+      </div>
+      <div class="feature-card" onclick="navigate('glossary')">
+        <span class="card-icon">📖</span>
+        <h3>HR Glossary</h3>
+        <p>Know your HRIS from your ATS — essential HR terminology explained.</p>
+      </div>
+      <div class="feature-card" onclick="navigate('checklist')">
+        <span class="card-icon">✅</span>
+        <h3>Interview Checklist</h3>
+        <p>A tick-by-tick prep checklist so nothing is left to chance.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAR METHOD -->
+  <div id="page-star" class="page">
+    <div class="section-wrap">
+      <div class="section-header">
+        <span class="section-label">Framework</span>
+        <h2>The STAR Method</h2>
+        <p>Behavioural interview questions ask you about past experiences. Structuring your answer with STAR makes your response clear, compelling, and easy to follow.</p>
+      </div>
+
+      <div class="star-banner">
+        <h3>Why STAR works</h3>
+        <p>Interviewers use behavioural questions because past behaviour predicts future performance. STAR gives you a logical structure that keeps your answer concise and evidence-based — exactly what HR hiring managers want to see.</p>
+      </div>
+
+      <div class="star-steps">
+        <div class="star-step">
+          <div class="letter">S</div>
+          <h4>Situation</h4>
+          <p>Set the scene. Briefly describe the context and background. Keep it short — this is just the setup, not the main event.</p>
+        </div>
+        <div class="star-step">
+          <div class="letter">T</div>
+          <h4>Task</h4>
+          <p>Explain your specific role or responsibility in that situation. What were you expected to do or solve?</p>
+        </div>
+        <div class="star-step">
+          <div class="letter">A</div>
+          <h4>Action</h4>
+          <p>This is your moment to shine. Describe the specific steps <em>you</em> took. Use "I" not "we". Be concrete and detailed.</p>
+        </div>
+        <div class="star-step">
+          <div class="letter">R</div>
+          <h4>Result</h4>
+          <p>What was the outcome? Quantify where possible. Mention any lessons learned — it shows self-awareness, which HR values highly.</p>
+        </div>
+      </div>
+
+      <div class="q-box">
+        <h4>📌 Example STAR Answer</h4>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem"><strong>Question:</strong> "Tell me about a time you handled a conflict between colleagues."</p>
+        <p style="font-size:0.88rem;line-height:1.7;color:var(--dark)">
+          <strong style="color:var(--accent)">S —</strong> During my second year at university, I was part of a group project where two team members had a significant disagreement over the direction of our presentation.<br><br>
+          <strong style="color:var(--gold)">T —</strong> As the informal project lead, I felt responsible for keeping the team productive and ensuring we met our deadline.<br><br>
+          <strong style="color:var(--accent2)">A —</strong> I arranged a brief one-to-one conversation with each person to understand their perspective without judgement. I then facilitated a short group discussion where I reframed the disagreement as two valid approaches and asked the team to evaluate both against our objectives.<br><br>
+          <strong style="color:var(--dark)">R —</strong> We reached a consensus within an hour, incorporated the stronger elements of both ideas, and submitted on time. Our group received an A, and one of the team members later told me they appreciated how I handled it.
+        </p>
+      </div>
+
+      <div class="q-box" style="background:var(--cream)">
+        <h4>⚠️ Common STAR Mistakes to Avoid</h4>
+        <ul class="hint-list" style="margin-top:0.8rem">
+          <li>Spending too long on the Situation — keep it to 1–2 sentences</li>
+          <li>Saying "we did" instead of "I did" — the interviewer wants to know YOUR contribution</li>
+          <li>Forgetting the Result — always land the plane with an outcome</li>
+          <li>Being vague — use numbers, timelines, and specifics wherever possible</li>
+          <li>Using a negative outcome without showing reflection — always add what you learned</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="page-questions" class="page">
+    <div class="section-wrap">
+      <div class="section-header">
+        <span class="section-label">Interview Questions</span>
+        <h2>HR Internship Questions</h2>
+        <p>Common questions asked in HR internship interviews, organised by category. Click "Show Hints" for guidance on how to approach each one.</p>
+      </div>
+
+      <div id="questions-list"></div>
+    </div>
+  </div>
+
+  <!-- PRACTICE MODE -->
+  <div id="page-practice" class="page">
+    <div class="section-wrap">
+      <div class="section-header">
+        <span class="section-label">Practice Mode</span>
+        <h2>Simulate the Interview</h2>
+        <p>Pick a question, start your timer, and write out your full STAR answer. Use this to build speed and confidence.</p>
+      </div>
+
+      <div class="practice-container">
+        <div class="q-nav">
+          <button class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem" onclick="prevQ()">← Prev</button>
+          <span class="q-counter" id="q-counter">Question 1 of 20</span>
+          <button class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem" onclick="nextQ()">Next →</button>
+        </div>
+        <div class="timer-display" id="timer-display">0:00</div>
+        <div class="practice-q" id="practice-q">Loading question...</div>
+        <div class="star-labels">
+          <span class="star-label-pill pill-s">S — Situation</span>
+          <span class="star-label-pill pill-t">T — Task</span>
+          <span class="star-label-pill pill-a">A — Action</span>
+          <span class="star-label-pill pill-r">R — Result</span>
+        </div>
+        <textarea class="answer-area" id="answer-area" placeholder="Write your STAR answer here. Remember: Situation → Task → Action → Result..."></textarea>
+        <div class="practice-actions">
+          <button class="btn btn-primary" id="timer-btn" onclick="toggleTimer()">▶ Start Timer</button>
+          <button class="btn btn-secondary" onclick="clearAnswer()">Clear Answer</button>
+          <button class="btn btn-secondary" onclick="showHintModal()">Show Hints</button>
+        </div>
+      </div>
+
+      <div id="hint-modal" style="display:none;margin-top:1.5rem">
+        <div class="q-box" style="background:rgba(200,132,90,0.05);border-color:rgba(200,132,90,0.3)">
+          <h5 style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:0.8rem">Answer Hints</h5>
+          <ul class="hint-list" id="modal-hints"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div id="page-tips" class="page">
+    <div class="section-wrap">
+      <div class="section-header">
+        <span class="section-label">Preparation & Strategy</span>
+        <h2>Tips & Tricks</h2>
+        <p>Practical advice from preparation through to post-interview follow-up.</p>
+      </div>
+
+      <div class="tips-tabs">
+        <button class="tab-btn active" onclick="switchTab('before')">Before the Interview</button>
+        <button class="tab-btn" onclick="switchTab('during')">During</button>
+        <button class="tab-btn" onclick="switchTab('after')">After</button>
+        <button class="tab-btn" onclick="switchTab('dodont')">Do's & Don'ts</button>
+      </div>
+
+      <div id="tab-before" class="tab-content active">
+        <div class="tip-card"><div class="tip-num">01</div><div class="tip-body"><h4>Research the company's HR department specifically</h4><p>Look at their LinkedIn, check if they've been in the news, and find out what HR software they use. Mentioning specific tools (Workday, SAP SuccessFactors, etc.) shows genuine interest.</p></div></div>
+        <div class="tip-card"><div class="tip-num">02</div><div class="tip-body"><h4>Prepare 5–7 STAR stories</h4><p>These stories should be adaptable to different questions. Good themes: conflict resolution, working under pressure, showing initiative, learning from failure, and supporting others.</p></div></div>
+        <div class="tip-card"><div class="tip-num">03</div><div class="tip-body"><h4>Know current HR trends</h4><p>Brush up on topics like DE&I (Diversity, Equity & Inclusion), hybrid working policies, employee wellbeing, and talent retention. These are hot topics every HR team is navigating.</p></div></div>
+        <div class="tip-card"><div class="tip-num">04</div><div class="tip-body"><h4>Prepare smart questions to ask them</h4><p>Have 3–4 thoughtful questions ready. Try: "What does success look like in this internship?" or "How does the HR team support line managers here?" Avoid asking about salary or holidays first.</p></div></div>
+        <div class="tip-card"><div class="tip-num">05</div><div class="tip-body"><h4>Practice aloud, not just in your head</h4><p>Record yourself or ask a friend to mock-interview you. Hearing your own answers reveals filler words, pacing issues, and gaps you'd never notice just thinking through answers.</p></div></div>
+        <div class="tip-card"><div class="tip-num">06</div><div class="tip-body"><h4>Plan your logistics</h4><p>Know exactly how you're getting there (or how your tech works for video). Being late or flustered before you even start costs you confidence points. Arrive or log in early.</p></div></div>
+      </div>
+
+      <div id="tab-during" class="tab-content">
+        <div class="tip-card"><div class="tip-num">01</div><div class="tip-body"><h4>Take a breath before answering</h4><p>It's completely fine to say "That's a great question, let me take a moment to think." A brief pause looks considered, not blank. Never rush into a rambling answer.</p></div></div>
+        <div class="tip-card"><div class="tip-num">02</div><div class="tip-body"><h4>Mirror the interviewer's energy</h4><p>If they're warm and casual, relax a little. If they're formal, stay professional. Adaptability is a core HR skill — demonstrating it in the room is powerful.</p></div></div>
+        <div class="tip-card"><div class="tip-num">03</div><div class="tip-body"><h4>Use HR language naturally</h4><p>Slip in terms like "employee engagement," "retention strategies," "onboarding," or "talent pipeline" when relevant. It signals you understand the field, not just the job title.</p></div></div>
+        <div class="tip-card"><div class="tip-num">04</div><div class="tip-body"><h4>Show genuine curiosity about people</h4><p>HR is fundamentally about people. Let your interest in human behaviour, fairness, and development come through. Interviewers are often assessing whether you'd be trusted by employees.</p></div></div>
+        <div class="tip-card"><div class="tip-num">05</div><div class="tip-body"><h4>Be honest about what you don't know</h4><p>If asked about something you haven't encountered yet, say so — then pivot to how you'd find out or learn. Honesty and learning agility are prized in HR.</p></div></div>
+        <div class="tip-card"><div class="tip-num">06</div><div class="tip-body"><h4>Watch your body language</h4><p>Maintain natural eye contact, sit up straight, and nod when listening. In video interviews, look at your camera, not the screen. Turn off notifications and find good lighting.</p></div></div>
+      </div>
+
+      <div id="tab-after" class="tab-content">
+        <div class="tip-card"><div class="tip-num">01</div><div class="tip-body"><h4>Send a thank-you email within 24 hours</h4><p>Keep it brief, professional, and specific — reference something from the conversation. This is often the deciding factor between two equally strong candidates.</p></div></div>
+        <div class="tip-card"><div class="tip-num">02</div><div class="tip-body"><h4>Reflect on what went well and what didn't</h4><p>Write notes immediately after while it's fresh. What questions caught you off guard? What would you answer differently? Use this for your next interview.</p></div></div>
+        <div class="tip-card"><div class="tip-num">03</div><div class="tip-body"><h4>Follow up politely if you haven't heard back</h4><p>If they gave you a timeline and it's passed, one polite follow-up email is perfectly appropriate. It shows you're genuinely interested, not just casting a wide net.</p></div></div>
+        <div class="tip-card"><div class="tip-num">04</div><div class="tip-body"><h4>If rejected, ask for feedback</h4><p>Not all companies offer it, but asking professionally shows maturity. Frame it as: "I'd appreciate any feedback that could help me grow." Sometimes they'll share something invaluable.</p></div></div>
+      </div>
+
+      <div id="tab-dodont" class="tab-content">
+        <div class="do-dont">
+          <div class="do-box">
+            <h4>✓ Do</h4>
+            <ul>
+              <li>Tailor your answers to the specific company and role</li>
+              <li>Use specific examples with measurable outcomes</li>
+              <li>Show enthusiasm for people and HR as a career</li>
+              <li>Demonstrate self-awareness and a growth mindset</li>
+              <li>Research the company's culture and values beforehand</li>
+              <li>Ask thoughtful questions at the end</li>
+              <li>Speak confidently but not arrogantly</li>
+              <li>Follow up after the interview</li>
+            </ul>
+          </div>
+          <div class="dont-box">
+            <h4>✗ Don't</h4>
+            <ul>
+              <li>Badmouth previous employers or teachers</li>
+              <li>Give generic, vague answers with no examples</li>
+              <li>Say "I'm a people person" without backing it up</li>
+              <li>Forget to mention YOUR specific contribution ("we" vs "I")</li>
+              <li>Lie or exaggerate — HR professionals are trained to detect this</li>
+              <li>Ask only about pay, holidays, or perks first</li>
+              <li>Ramble — keep answers to 2–3 minutes max</li>
+              <li>Forget to send a follow-up thank you</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOSSARY -->
+  <div id="page-glossary" class="page">
+    <div class="section-wrap">
+      <div class="section-header">
+        <span class="section-label">HR Terminology</span>
+        <h2>HR Glossary</h2>
+        <p>Key terms you'll encounter in HR conversations, job descriptions, and interviews. Knowing these impresses interviewers.</p>
+      </div>
+      <input type="text" class="glossary-search" placeholder="Search terms..." oninput="filterGlossary(this.value)" id="glossary-search">
+      <div id="glossary-list"></div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div id="page-checklist" class="page">
+    <div class="section-wrap">
+      <div class="section-header">
+        <span class="section-label">Pre-Interview</span>
+        <h2>Interview Checklist</h2>
+        <p>Tick off each item as you go. Progress saves in your browser.</p>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <p class="progress-label" id="progress-label">0% complete</p>
+      <br>
+      <div class="checklist-wrap" id="checklist-wrap"></div>
+    </div>
+  </div>
+
+</main>
+
+<div class="footer-hint">Made to help you succeed — good luck out there 🌟</div>
+
+<script>
+// ========== DATA ==========
+
+const questions = [
+  { cat: "Motivation", q: "Why do you want to work in HR?", hints: ["Connect your answer to a genuine interest in people and organisational development", "Mention any relevant coursework, experience, or moment that sparked your interest", "Avoid saying 'I like helping people' — be more specific about what aspect of HR excites you"] },
+  { cat: "Motivation", q: "Why do you want this internship specifically at our company?", hints: ["Reference something specific from the company's website, LinkedIn, or news", "Mention the company's values and how they align with yours", "If they have a notable HR initiative (DE&I, wellbeing programme), name it"] },
+  { cat: "STAR — Conflict", q: "Tell me about a time you resolved a conflict between two people.", hints: ["Focus on how you listened to both sides without taking sides", "Describe the specific steps you took to mediate", "Mention the outcome — was the conflict resolved? Was trust rebuilt?"] },
+  { cat: "STAR — Initiative", q: "Describe a time you went above and beyond what was expected of you.", hints: ["Choose an example where YOU noticed a need and acted without being asked", "Quantify the impact where possible (saved time, improved process, etc.)", "Show the mindset of proactivity — this is highly valued in HR"] },
+  { cat: "STAR — Communication", q: "Tell me about a time you had to communicate a difficult message to someone.", hints: ["Think about delivering bad news, constructive feedback, or a policy change", "Focus on HOW you delivered the message — timing, tone, empathy", "Describe how the person responded and what you learned"] },
+  { cat: "STAR — Teamwork", q: "Give an example of when you worked effectively in a team.", hints: ["Describe your specific role within the team, not just what the team did", "Mention how you adapted to different personalities or working styles", "Highlight collaboration skills — HR is deeply collaborative"] },
+  { cat: "STAR — Pressure", q: "Tell me about a time you had to manage multiple priorities under pressure.", hints: ["Show your organisational skills — how did you triage your workload?", "Mention any tools or methods you used (to-do lists, calendars, etc.)", "Reflect on the result — did you meet the deadline? What did you learn?"] },
+  { cat: "STAR — Learning", q: "Describe a time you made a mistake and how you handled it.", hints: ["Don't pick a trivial mistake, but don't pick something catastrophic either", "The key is showing accountability — own the mistake, don't deflect", "Finish strong: what did you learn and how did you apply it going forward?"] },
+  { cat: "STAR — Feedback", q: "Tell me about a time you received critical feedback. How did you respond?", hints: ["Show that you can receive feedback without becoming defensive", "Describe what you actually changed or improved as a result", "Bonus: if you sought out feedback proactively, mention that — it shows self-awareness"] },
+  { cat: "STAR — Leadership", q: "Give an example of a time you took the lead on something.", hints: ["Leadership doesn't have to mean a formal title — group projects, volunteering, sports teams all count", "What challenge did the situation present and how did you step up?", "Focus on how you influenced or motivated others"] },
+  { cat: "HR Knowledge", q: "What do you understand by the term 'employee engagement'?", hints: ["Define it: how emotionally invested and committed employees are to their work and organisation", "Give examples of factors that affect it: recognition, communication, development opportunities", "You might mention that engaged employees are more productive and less likely to leave"] },
+  { cat: "HR Knowledge", q: "What is the difference between HR and payroll?", hints: ["HR manages the entire employee lifecycle: recruitment, development, relations, culture", "Payroll manages compensation, tax, and statutory deductions", "In many organisations they're separate functions — knowing this shows awareness"] },
+  { cat: "HR Knowledge", q: "What does DE&I stand for, and why is it important in HR?", hints: ["Diversity, Equity & Inclusion", "Diversity = representation; Equity = fair treatment accounting for difference; Inclusion = belonging", "HR is often responsible for embedding DE&I into policies, hiring, and culture"] },
+  { cat: "HR Knowledge", q: "Can you name any HR legislation you're aware of in the UK?", hints: ["Employment Rights Act 1996, Equality Act 2010, GDPR 2018, National Minimum Wage Act", "Even naming 1–2 with a brief explanation shows you've done your homework", "If you're unsure, mention that you're aware HR operates within a legal framework and you're keen to learn more"] },
+  { cat: "Situational", q: "If an employee came to you upset about their manager, what would you do?", hints: ["Show empathy first — listen without judgement and create a safe space", "Explain that you'd explore whether they want advice, to make a formal complaint, or just to be heard", "Mention confidentiality and the importance of following company procedures"] },
+  { cat: "Situational", q: "How would you handle confidential information about an employee?", hints: ["Emphasise discretion, need-to-know basis, and GDPR compliance", "Give a clear, practical answer: you wouldn't discuss it casually or share without authorisation", "Show you understand the gravity — trust is central to HR's relationship with employees"] },
+  { cat: "Situational", q: "What would you do if you disagreed with an HR policy at the company?", hints: ["Show that you'd raise it through appropriate channels, not just complain", "Demonstrate that you can work within structures while advocating for change professionally", "HR professionals often influence policy — show you understand that process"] },
+  { cat: "Self-Awareness", q: "What are your strengths that are particularly relevant to an HR role?", hints: ["Pick 2–3 strengths and back each one with a brief example", "Relevant strengths: empathy, communication, discretion, organisation, conflict resolution, attention to detail", "Avoid generic answers — make it specific to you and to HR"] },
+  { cat: "Self-Awareness", q: "What is an area you're working to develop, and how are you addressing it?", hints: ["Pick something genuine that isn't critical to the role", "Show you've already taken steps to improve — reading, courses, seeking feedback", "Frame it as a growth story, not a weakness confession"] },
+  { cat: "Future Goals", q: "Where do you see yourself in HR in five years?", hints: ["Show ambition, but be realistic — you're applying for an internship, not a director role", "Mention areas of HR you're interested in exploring: L&D, ER, recruitment, HRBP, etc.", "Tie your answer back to why this internship is the right first step"] }
+];
+
+const glossaryData = [
+  { tag: "Recruitment", term: "ATS (Applicant Tracking System)", def: "Software used to manage the recruitment process, tracking applications from submission through to hiring decisions. Examples: Greenhouse, Lever, Workday." },
+  { tag: "Recruitment", term: "Talent Pipeline", def: "A pool of pre-qualified, interested candidates who could fill future roles. HR teams maintain pipelines to reduce time-to-hire." },
+  { tag: "Recruitment", term: "Employer Value Proposition (EVP)", def: "The unique set of benefits and values an organisation offers employees in return for their skills and experience. Central to employer branding." },
+  { tag: "HR Systems", term: "HRIS (Human Resource Information System)", def: "A software solution for storing and managing employee data, including records, benefits, payroll, and compliance. Examples: SAP SuccessFactors, Workday, BambooHR." },
+  { tag: "HR Systems", term: "LMS (Learning Management System)", def: "A platform used to deliver, track, and manage employee training and development. Examples: Cornerstone, Docebo." },
+  { tag: "Employee Relations", term: "Employee Engagement", def: "The level of emotional commitment and involvement an employee has toward their organisation and its goals. High engagement typically correlates with better performance and lower turnover." },
+  { tag: "Employee Relations", term: "Grievance Procedure", def: "A formal process by which employees can raise workplace concerns or complaints. HR typically manages and facilitates this process." },
+  { tag: "Employee Relations", term: "Disciplinary Procedure", def: "A structured process used when an employee's conduct or performance falls below the required standard. Must follow fair, documented steps." },
+  { tag: "Legislation", term: "Equality Act 2010", def: "UK legislation that protects individuals from discrimination based on nine protected characteristics: age, disability, gender reassignment, marriage/civil partnership, pregnancy/maternity, race, religion/belief, sex, and sexual orientation." },
+  { tag: "Legislation", term: "GDPR", def: "General Data Protection Regulation — EU/UK law governing how personal data (including employee data) is collected, stored, and used. HR must ensure full compliance." },
+  { tag: "Legislation", term: "Right to Work", def: "The legal requirement for employers to verify that all employees have the right to work in the UK before employment begins." },
+  { tag: "Strategy", term: "HRBP (HR Business Partner)", def: "A senior HR professional who aligns HR strategy with business objectives, working closely with department leaders rather than handling day-to-day admin." },
+  { tag: "Strategy", term: "Succession Planning", def: "The process of identifying and developing employees to fill key leadership roles in the future, ensuring business continuity." },
+  { tag: "Strategy", term: "People Analytics", def: "Using data and metrics to inform HR decisions — for example, analysing turnover rates, engagement scores, or time-to-hire." },
+  { tag: "Learning & Development", term: "Onboarding", def: "The structured process of integrating a new employee into the organisation, covering orientation, training, culture, and compliance." },
+  { tag: "Learning & Development", term: "L&D (Learning & Development)", def: "The HR function responsible for improving employees' skills and capabilities through training programmes, workshops, e-learning, and coaching." },
+  { tag: "Wellbeing", term: "Employee Assistance Programme (EAP)", def: "A confidential support service offering employees access to counselling, financial advice, and other wellbeing resources, typically free of charge." },
+  { tag: "DE&I", term: "DE&I (Diversity, Equity & Inclusion)", def: "Diversity = varied representation; Equity = fair treatment accounting for individual differences; Inclusion = creating a culture where everyone feels they belong." },
+  { tag: "Compensation", term: "Total Compensation", def: "Everything an employee receives from their employer — base salary, bonuses, pension contributions, health benefits, holiday allowance, and other perks." },
+  { tag: "Compensation", term: "Gender Pay Gap Reporting", def: "UK employers with 250+ employees must publish annual data on the difference in average pay between male and female employees. HR manages this compliance requirement." }
+];
+
+const checklistItems = {
+  "Research & Knowledge": [
+    "Research the company's mission, values, and recent news",
+    "Look up the HR team on LinkedIn",
+    "Research the company's HR software/tools if mentioned",
+    "Read about current HR trends (DE&I, hybrid work, wellbeing)",
+    "Review the UK employment legislation basics",
+    "Review the job description and match your experiences to it"
+  ],
+  "Preparing Your Answers": [
+    "Prepare 5–7 STAR stories covering different themes",
+    "Practise answers to 'Why HR?' and 'Why this company?'",
+    "Prepare an answer for your greatest weakness",
+    "Prepare 3–4 thoughtful questions to ask the interviewer",
+    "Do at least one mock interview aloud (with a friend or recorded)"
+  ],
+  "Practical Preparation": [
+    "Confirm the time, location, or video call link",
+    "Plan your route or test your tech 24 hours ahead",
+    "Choose and prepare your interview outfit",
+    "Print or save a copy of your CV for reference",
+    "Prepare a notebook and pen for notes"
+  ],
+  "On the Day": [
+    "Arrive/log in 5–10 minutes early",
+    "Turn off phone notifications",
+    "Have a glass of water nearby",
+    "Take a breath before entering the room or joining the call",
+    "Smile and greet your interviewer warmly"
+  ],
+  "After the Interview": [
+    "Send a thank-you email within 24 hours",
+    "Reflect on what went well and what to improve",
+    "Follow up if you haven't heard back within their stated timeframe",
+    "If rejected, consider asking for feedback"
+  ]
+};
+
+// ========== NAVIGATION ==========
+function navigate(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  const btns = document.querySelectorAll('.nav-btn');
+  const pageIndex = ['home','star','questions','practice','tips','glossary','checklist'].indexOf(page);
+  if (btns[pageIndex]) btns[pageIndex].classList.add('active');
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo(0,0);
+}
+
+function toggleMobileNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ========== QUESTIONS PAGE ==========
+function renderQuestions() {
+  const el = document.getElementById('questions-list');
+  el.innerHTML = questions.map((q, i) => `
+    <div class="q-box">
+      <span class="q-category">${q.cat}</span>
+      <h4>${q.q}</h4>
+      <button class="reveal-btn" onclick="toggleHints(${i})">Show Hints</button>
+      <div class="q-hints" id="hints-${i}">
+        <h5>Guidance</h5>
+        <ul class="hint-list">
+          ${q.hints.map(h => `<li>${h}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleHints(i) {
+  const el = document.getElementById('hints-' + i);
+  const btn = el.previousElementSibling;
+  el.classList.toggle('open');
+  btn.textContent = el.classList.contains('open') ? 'Hide Hints' : 'Show Hints';
+}
+
+// ========== PRACTICE MODE ==========
+let currentQ = 0;
+let timerRunning = false;
+let timerInterval = null;
+let timerSeconds = 0;
+let hintVisible = false;
+
+function renderPracticeQ() {
+  const q = questions[currentQ];
+  document.getElementById('practice-q').textContent = q.q;
+  document.getElementById('q-counter').textContent = `Question ${currentQ + 1} of ${questions.length}`;
+  resetTimer();
+  document.getElementById('hint-modal').style.display = 'none';
+  hintVisible = false;
+}
+
+function prevQ() {
+  currentQ = (currentQ - 1 + questions.length) % questions.length;
+  renderPracticeQ();
+}
+
+function nextQ() {
+  currentQ = (currentQ + 1) % questions.length;
+  renderPracticeQ();
+}
+
+function toggleTimer() {
+  if (!timerRunning) {
+    timerRunning = true;
+    document.getElementById('timer-btn').textContent = '⏸ Pause';
+    timerInterval = setInterval(() => {
+      timerSeconds++;
+      const m = Math.floor(timerSeconds / 60);
+      const s = timerSeconds % 60;
+      document.getElementById('timer-display').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    }, 1000);
+  } else {
+    timerRunning = false;
+    clearInterval(timerInterval);
+    document.getElementById('timer-btn').textContent = '▶ Resume';
+  }
+}
+
+function resetTimer() {
+  timerRunning = false;
+  clearInterval(timerInterval);
+  timerSeconds = 0;
+  document.getElementById('timer-display').textContent = '0:00';
+  document.getElementById('timer-btn').textContent = '▶ Start Timer';
+}
+
+function clearAnswer() {
+  document.getElementById('answer-area').value = '';
+  resetTimer();
+}
+
+function showHintModal() {
+  const modal = document.getElementById('hint-modal');
+  hintVisible = !hintVisible;
+  modal.style.display = hintVisible ? 'block' : 'none';
+  const q = questions[currentQ];
+  document.getElementById('modal-hints').innerHTML = q.hints.map(h => `<li>${h}</li>`).join('');
+}
+
+// ========== TIPS TABS ==========
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ========== GLOSSARY ==========
+function renderGlossary(filter = '') {
+  const el = document.getElementById('glossary-list');
+  const filtered = glossaryData.filter(g =>
+    g.term.toLowerCase().includes(filter.toLowerCase()) ||
+    g.def.toLowerCase().includes(filter.toLowerCase()) ||
+    g.tag.toLowerCase().includes(filter.toLowerCase())
+  );
+  el.innerHTML = filtered.length ? filtered.map(g => `
+    <div class="gloss-item">
+      <span class="gloss-tag">${g.tag}</span>
+      <div class="gloss-term">${g.term}</div>
+      <div class="gloss-def">${g.def}</div>
+    </div>
+  `).join('') : '<p style="color:var(--muted);padding:1rem 0">No terms found.</p>';
+}
+
+function filterGlossary(val) {
+  renderGlossary(val);
+}
+
+// ========== CHECKLIST ==========
+function renderChecklist() {
+  const wrap = document.getElementById('checklist-wrap');
+  let html = '';
+  let totalItems = 0;
+  Object.entries(checklistItems).forEach(([group, items]) => {
+    html += `<div class="check-group"><h4>${group}</h4>`;
+    items.forEach((item, i) => {
+      const key = 'chk-' + group + '-' + i;
+      const checked = localStorage.getItem(key) === 'true';
+      if (checked) totalItems++;
+      html += `
+        <div class="check-item">
+          <input type="checkbox" id="${key}" ${checked ? 'checked' : ''} onchange="saveCheck('${key}')">
+          <label for="${key}">${item}</label>
+        </div>`;
+    });
+    html += '</div>';
+    totalItems = 0; // reset for correct counting below
+  });
+  wrap.innerHTML = html;
+  updateProgress();
+}
+
+function saveCheck(key) {
+  const el = document.getElementById(key);
+  localStorage.setItem(key, el.checked);
+  updateProgress();
+}
+
+function updateProgress() {
+  const all = document.querySelectorAll('#checklist-wrap input[type="checkbox"]');
+  const checked = document.querySelectorAll('#checklist-wrap input[type="checkbox"]:checked');
+  const pct = all.length ? Math.round((checked.length / all.length) * 100) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = `${pct}% complete — ${checked.length} of ${all.length} items done`;
+}
+
+// ========== INIT ==========
+renderQuestions();
+renderPracticeQ();
+renderGlossary();
+renderChecklist();
+</script>
+</body>
+</html>
